@@ -32,7 +32,7 @@ export default function PortfolioPage() {
 	if (!userDetails) return null;
 
 	return (
-		<div className="min-h-screen bg-background-500 text-foreground p-6 md:p-16">
+		<div className="min-h-screen bg-background text-foreground p-6 md:p-16">
 			{/* Hero Section */}
 			<section className=" max-w-6xl mx-auto pb-6 border-b border-border relative flex flex-col sm:flex-row items-start gap-8 animate-fade-in">
 				{userDetails?.avatar && (
@@ -181,8 +181,8 @@ export default function PortfolioPage() {
 				className="border-t border-border max-w-6xl mx-auto py-6 animate-fade-in"
 				style={{ animationDelay: "0.7s" }}
 			>
-				<div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-					<div className="text-center sm:text-left space-y-2 text-sm">
+				<div className="flex items-left gap-6">
+					<div className="text-left space-y-2 text-sm">
 						<p className="text-muted-foreground">
 							Built with Next.js and Tailwind CSS, deployed with Vercel
 						</p>

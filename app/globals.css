@@ -230,3 +230,42 @@
 	box-shadow: 0 0 10px rgba(37, 99, 235, 0.8), 0 0 20px rgba(37, 99, 235, 0.6),
 		0 0 30px rgba(37, 99, 235, 0.4);
 }
+
+/* Hide scrollbar */
+.hide-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* Gallery scroll animation */
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(-50%);
+		opacity: 0;
+	}
+}
+
+.animate-scroll {
+	display: flex;
+	width: max-content;
+	animation: scroll 30s linear infinite;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.animate-scroll:hover {
+	animation-play-state: paused;
+}
