@@ -72,7 +72,7 @@ export function ProjectsSection({
 					{projects.map((project) => (
 						<div
 							key={project.id}
-							className="group bg-card border border-border rounded-lg overflow-hidden hover:border-primary transition-colors flex flex-col"
+							className="group bg-card border border-border rounded-lg overflow-hidden hover:border-primary transition-colors flex flex-col h-fit"
 						>
 							<div className="relative h-34 w-full overflow-hidden bg-muted">
 								<img
