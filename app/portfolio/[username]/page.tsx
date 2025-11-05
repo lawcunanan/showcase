@@ -72,17 +72,17 @@ export default function PortfolioPage() {
 					)}
 
 					<div className="grid grid-cols-2 sm:flex gap-3 mt-6">
-						<Button
-							className="gap-2 bg-blue-600 border text-white hover:bg-blue-900 cursor-pointer"
-							onClick={() => {
-								if (userDetails?.cvUrl) {
-									window.open(userDetails?.cvUrl, "_blank");
-								}
-							}}
-						>
-							<Download className="h-4 w-4" />
-							Download my CV
-						</Button>
+						{userDetails?.cvUrl && (
+							<Button
+								className="gap-2 bg-blue-600 border text-white hover:bg-blue-900 cursor-pointer"
+								onClick={() => {
+									window.open(userDetails.cvUrl, "_blank");
+								}}
+							>
+								<Download className="h-4 w-4" />
+								Download my CV
+							</Button>
+						)}
 						{userDetails?.phone && (
 							<Button
 								className="gap-2 bg-background border text-foreground hover:bg-foreground hover:text-background cursor-pointer"

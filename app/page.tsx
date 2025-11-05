@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, Link as LinkIcon, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TypingEffect } from "@/components/typing-effect";
@@ -135,7 +135,15 @@ export default function Home() {
 			<footer className="pb-8">
 				<div className="text-center space-y-1">
 					<p className="text-xs text-muted-foreground">Developer</p>
-					<p className="text-sm text-muted-foreground">Lawrence S. Cunanan</p>
+					<Link
+						href="https://lacunanan.vercel.app/"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-sm text-muted-foreground inline-flex items-center gap-1 hover:text-primary transition-colors"
+					>
+						Lawrence S. Cunanan
+						<LinkIcon className="h-3 w-3" />
+					</Link>
 				</div>
 			</footer>
 

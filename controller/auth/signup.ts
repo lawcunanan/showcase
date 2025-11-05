@@ -88,7 +88,7 @@ export const handleSignUp = async ({
 			linkedin: "",
 			twitter: "",
 			website: "",
-			status: "Inactive",
+			status: "Active",
 			createdAt: serverTimestamp(),
 			updatedAt: serverTimestamp(),
 		});

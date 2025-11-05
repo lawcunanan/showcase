@@ -5,39 +5,44 @@ export function ContactsSection({ user }: { user: User }) {
 	const contacts = [
 		{
 			icon: Mail,
-			link: `mailto:${user.email}`,
+			link: user.email ? `mailto:${user.email}` : undefined,
 			label: "Email",
 		},
 		{
 			icon: Instagram,
-			link: user.instagram || "https://instagram.com",
+			link: user.instagram,
 			label: "Instagram",
 		},
 		{
 			icon: Facebook,
-			link: user.facebook || "https://facebook.com",
+			link: user.facebook,
 			label: "Facebook",
 		},
 		{
 			icon: Linkedin,
-			link: user.linkedin || "https://linkedin.com",
+			link: user.linkedin,
 			label: "LinkedIn",
 		},
 		{
 			icon: Github,
-			link: user.github || "https://github.com",
+			link: user.github,
 			label: "GitHub",
 		},
-	];
+	].filter((contact) => contact.link);
+
+	if (contacts.length === 0) {
+		return null;
+	}
 
 	return (
 		<section className="space-y-6">
 			<div>
-				<h2 className="text-2xl lg:text-3xl  font-bold mb-3">Contact</h2>
+				<h2 className="text-2xl lg:text-3xl font-bold mb-3">Contact</h2>
 			</div>
 
 			<div className="flex gap-4">
 				{contacts.map((contact) => {
+					if (!contact.link) return null;
 					const Icon = contact.icon;
 					return (
 						<a
