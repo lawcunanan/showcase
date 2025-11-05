@@ -9,15 +9,21 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TypingEffect } from "@/components/typing-effect";
 import { SignInDialog } from "@/components/portfolio/dialogs/sign-in-dialog";
+import { SignUpDialog } from "@/components/portfolio/dialogs/sign-up-dialog";
+import { useAlert } from "@/contexts/alert-context";
 
 export default function Home() {
 	const searchParams = useSearchParams();
+	const { addAlert } = useAlert();
 	const [signInOpen, setSignInOpen] = useState(false);
+	const [signUpOpen, setSignUpOpen] = useState(false);
 
 	useEffect(() => {
 		const mode = searchParams.get("mode");
 		if (mode === "signin") {
 			setSignInOpen(true);
+		} else if (mode === "create") {
+			setSignUpOpen(true);
 		}
 	}, [searchParams]);
 
@@ -85,6 +91,11 @@ export default function Home() {
 			</main>
 
 			<SignInDialog open={signInOpen} onOpenChange={setSignInOpen} />
+			<SignUpDialog
+				open={signUpOpen}
+				onOpenChange={setSignUpOpen}
+				addAlert={addAlert}
+			/>
 		</div>
 	);
 }

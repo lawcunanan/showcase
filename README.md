@@ -21,37 +21,6 @@ A modern, dynamic portfolio platform built with Next.js 15, Firebase, and TypeSc
 - **Tailwind CSS** - Utility-first styling
 - **Lucide Icons** - Beautiful icon library
 
-## 📦 Getting Started
-
-**1. Clone and install**
-
-```bash
-git clone <your-repo-url>
-cd showcase
-pnpm install
-```
-
-**2. Set up environment variables**
-
-Create `.env.local` with your Firebase config:
-
-```env
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-```
-
-**3. Run the development server**
-
-```bash
-pnpm dev
-```
-
-Open `http://localhost:3000` in your browser.
-
 ---
 
 **Built with ❤️ using Next.js, Firebase, and TypeScript**
