@@ -100,7 +100,7 @@ export default function Home() {
 
 					{/* Active Portfolios Showcase */}
 					{!loading && activeUsers.length > 0 && (
-						<div className="pt-12 w-full overflow-hidden">
+						<div className="pt-12 w-full overflow-hidden animate-fade-in-up">
 							<h3 className="text-xl font-semibold mb-6">
 								Featured Portfolios
 							</h3>
