@@ -69,8 +69,8 @@ export default function Home() {
 				</div>
 			</header>
 
-			<main className="relative z-10 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
-				<div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
+			<main className="relative z-10 flex items-center justify-center min-h-screen px-6 ">
+				<div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in w-full">
 					{/* Main Headline and Intro */}
 					<div className="space-y-6">
 						<div className="space-y-4">
@@ -100,7 +100,7 @@ export default function Home() {
 
 					{/* Active Portfolios Showcase */}
 					{!loading && activeUsers.length > 0 && (
-						<div className="pt-12">
+						<div className="pt-12 w-full overflow-hidden">
 							<h3 className="text-xl font-semibold mb-6">
 								Featured Portfolios
 							</h3>
@@ -109,24 +109,15 @@ export default function Home() {
 									{[...activeUsers, ...activeUsers].map((user, index) => (
 										<div
 											key={`${user.id}-${index}`}
-											className="flex-shrink-0 w-80 mx-3 bg-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors cursor-pointer"
+											className="flex-shrink-0 w-72 sm:w-80 mx-3 bg-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors cursor-pointer"
 											onClick={() => router.push(`/portfolio/${user.username}`)}
 										>
 											<div className="space-y-2">
 												<h4 className="font-semibold text-sm truncate">
 													{user.name}
 												</h4>
-												<p className="text-xs text-muted-foreground truncate">
-													{user.email}
-												</p>
-												{user.location && (
-													<div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
-														<MapPin className="h-3 w-3 flex-shrink-0" />
-														<span className="truncate">{user.location}</span>
-													</div>
-												)}
 												{user.about && (
-													<p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+													<p className="text-xs text-muted-foreground line-clamp-2">
 														{user.about}
 													</p>
 												)}
@@ -141,7 +132,7 @@ export default function Home() {
 			</main>
 
 			{/* Developer Credit */}
-			<footer className="relative z-10 pb-8">
+			<footer className="pb-8">
 				<div className="text-center space-y-1">
 					<p className="text-xs text-muted-foreground">Developer</p>
 					<p className="text-sm text-muted-foreground">Lawrence S. Cunanan</p>
