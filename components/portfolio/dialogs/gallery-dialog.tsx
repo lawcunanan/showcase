@@ -57,6 +57,13 @@ export function GalleryDialog({
 
 	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files?.[0]) {
+			// Check if adding this image would exceed the limit
+			const currentImageCount = images?.length || 0;
+			if (currentImageCount >= 10) {
+				addAlert("danger", "Maximum 10 images allowed in gallery");
+				e.target.value = ""; // Reset input
+				return;
+			}
 			setImageFile(e.target.files[0]);
 		}
 	};

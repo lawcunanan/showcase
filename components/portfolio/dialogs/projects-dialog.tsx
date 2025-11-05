@@ -101,6 +101,12 @@ export function ProjectsDialog({
 	};
 
 	const handleSubmit = async () => {
+		// Check project limit when adding new (not editing)
+		if (!editingId && projects.length >= 5) {
+			addAlert("danger", "Maximum 5 projects allowed");
+			return;
+		}
+
 		const success = await saveProject({
 			userRef,
 			formData,

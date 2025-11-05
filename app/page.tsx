@@ -3,20 +3,25 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TypingEffect } from "@/components/typing-effect";
 import { SignInDialog } from "@/components/portfolio/dialogs/sign-in-dialog";
 import { SignUpDialog } from "@/components/portfolio/dialogs/sign-up-dialog";
 import { useAlert } from "@/contexts/alert-context";
+import { getActiveUsers } from "@/controller/get/getActiveUsers";
+import type { User } from "@/lib/mock-data";
 
 export default function Home() {
+	const router = useRouter();
 	const searchParams = useSearchParams();
 	const { addAlert } = useAlert();
 	const [signInOpen, setSignInOpen] = useState(false);
 	const [signUpOpen, setSignUpOpen] = useState(false);
+	const [activeUsers, setActiveUsers] = useState<User[]>([]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		const mode = searchParams.get("mode");
@@ -26,6 +31,11 @@ export default function Home() {
 			setSignUpOpen(true);
 		}
 	}, [searchParams]);
+
+	useEffect(() => {
+		const unsubscribe = getActiveUsers(setActiveUsers, setLoading);
+		return () => unsubscribe();
+	}, []);
 
 	return (
 		<div className="min-h-screen bg-background text-foreground relative overflow-hidden">
@@ -87,8 +97,56 @@ export default function Home() {
 							</Link>
 						</div>
 					</div>
+
+					{/* Active Portfolios Showcase */}
+					{!loading && activeUsers.length > 0 && (
+						<div className="pt-12">
+							<h3 className="text-xl font-semibold mb-6">
+								Featured Portfolios
+							</h3>
+							<div className="overflow-hidden relative">
+								<div className="animate-scroll">
+									{[...activeUsers, ...activeUsers].map((user, index) => (
+										<div
+											key={`${user.id}-${index}`}
+											className="flex-shrink-0 w-80 mx-3 bg-card border border-border rounded-lg p-4 hover:border-primary/50 transition-colors cursor-pointer"
+											onClick={() => router.push(`/portfolio/${user.username}`)}
+										>
+											<div className="space-y-2">
+												<h4 className="font-semibold text-sm truncate">
+													{user.name}
+												</h4>
+												<p className="text-xs text-muted-foreground truncate">
+													{user.email}
+												</p>
+												{user.location && (
+													<div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+														<MapPin className="h-3 w-3 flex-shrink-0" />
+														<span className="truncate">{user.location}</span>
+													</div>
+												)}
+												{user.about && (
+													<p className="text-xs text-muted-foreground mt-2 line-clamp-2">
+														{user.about}
+													</p>
+												)}
+											</div>
+										</div>
+									))}
+								</div>
+							</div>
+						</div>
+					)}
 				</div>
 			</main>
+
+			{/* Developer Credit */}
+			<footer className="relative z-10 pb-8">
+				<div className="text-center space-y-1">
+					<p className="text-xs text-muted-foreground">Developer</p>
+					<p className="text-sm text-muted-foreground">Lawrence S. Cunanan</p>
+				</div>
+			</footer>
 
 			<SignInDialog open={signInOpen} onOpenChange={setSignInOpen} />
 			<SignUpDialog
