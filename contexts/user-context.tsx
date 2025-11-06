@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useParams } from "next/navigation";
+import { useRouter, useParams, usePathname } from "next/navigation";
 import Lottie from "lottie-react";
 import authAnimation from "@/public/lottie/authLoading.json";
 import {
@@ -39,6 +39,7 @@ const UserContextAuth = createContext<UserContextAuthType | undefined>(
 export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 	const router = useRouter();
 	const params = useParams();
+	const pathname = usePathname();
 	const username = params?.username as string | undefined;
 	const { addAlert } = useAlert();
 
@@ -63,11 +64,11 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 						if (data.status === "Inactive") {
 							addAlert(
 								"danger",
-								"Account not yet paid. Please complete payment to access your portfolio."
+								"Firebase free trial has ended. Your portfolio is temporarily disabled until the Firebase subscription is reactivated."
 							);
 							setUserDetails(null);
 							setLoading(false);
-							router.push("/");
+							router.push("/firebase-reactivate");
 							return;
 						}
 
@@ -128,7 +129,7 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 				}
 			} else {
 				setLoading(false);
-				router.push("/");
+				if (pathname !== "/firebase-reactivate") router.push("/");
 			}
 		});
 

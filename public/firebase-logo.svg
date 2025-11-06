@@ -1,0 +1,12 @@
+<!-- Simple Firebase-style flame SVG (stylized) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#FFA000"/>
+      <stop offset="1" stop-color="#FF7043"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="20" fill="transparent" />
+  <path d="M128 18c12 24 34 40 34 72 0 36-22 58-34 72-12-14-34-36-34-72 0-32 22-48 34-72z" fill="url(#g)"/>
+  <path d="M88 110c10 16 28 26 40 40-12 8-34 10-48-4-16-16-6-36 8-36z" fill="#FFF3E0" opacity="0.18"/>
+</svg>
