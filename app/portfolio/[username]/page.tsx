@@ -71,7 +71,7 @@ export default function PortfolioPage() {
 						</div>
 					)}
 
-					<div className="grid grid-cols-2 sm:flex gap-3 mt-6">
+					<div className="flex flex-wrap gap-3 mt-6">
 						{userDetails?.cvUrl && (
 							<Button
 								className="gap-2 bg-blue-600 border text-white hover:bg-blue-900 cursor-pointer"
@@ -94,11 +94,12 @@ export default function PortfolioPage() {
 								{userDetails?.phone}
 							</Button>
 						)}
-						<a href={`mailto:${userDetails?.email}`}>
-							<Button className="gap-2 bg-background border text-foreground hover:bg-foreground hover:text-background cursor-pointer">
-								<Mail className="h-4 w-4" />
-								Send Email
-							</Button>
+						<a
+							href={`mailto:${userDetails?.email}`}
+							className="gap-2 bg-background border text-foreground hover:bg-foreground hover:text-background cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2"
+						>
+							<Mail className="h-4 w-4" />
+							Send Email
 						</a>
 						<ShareButton />
 					</div>
@@ -232,7 +233,7 @@ function ShareButton() {
 
 	return (
 		<Button
-			className="gap-2 w-full sm:w-auto bg-background border  text-foreground hover:bg-foreground hover:text-background cursor-pointer"
+			className="gap-2 bg-background border text-foreground hover:bg-foreground hover:text-background cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2"
 			onClick={handleShare}
 		>
 			<Copy className="h-4 w-4" />
