@@ -32,22 +32,7 @@ export function getActiveUsers(
 						username: data.username,
 						name: data.name,
 						email: data.email,
-						avatar: data.avatar || "",
-						cvUrl: data.cvUrl || "",
-						title: data.title || "",
-						location: data.location || "",
 						about: data.about || "",
-						phone: data.phone || "",
-						technologies: data.technologies || [],
-						galleryImages: data.galleryImages || [],
-						github: data.github || "",
-						linkedin: data.linkedin || "",
-						twitter: data.twitter || "",
-						website: data.website || "",
-						status: data.status,
-						projects: [],
-						achievements: [],
-						isCurrentUser: false,
 					};
 				});
 

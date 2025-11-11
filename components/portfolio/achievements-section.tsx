@@ -69,33 +69,38 @@ export function AchievementsSection({
 					</p>
 				</div>
 			) : (
-				<div className="space-y-6">
-					{achievements.map((achievement, index) => (
-						<div key={achievement.id} className="flex items-start gap-4 group">
-							<div className="flex flex-col items-center">
-								<div
-									className={`w-3 h-3 rounded-full flex-shrink-0 ${
-										index === 0 ? "bg-primary" : "bg-border"
-									}`}
-								/>
-								{index < achievements.length - 1 && (
-									<div className="w-0.5 h-12 bg-border/50 my-2" />
-								)}
-							</div>
+				<div className="max-h-[500px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-border [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-border/80">
+					<div className="space-y-6">
+						{achievements.map((achievement, index) => (
+							<div
+								key={achievement.id}
+								className="flex items-start gap-4 group"
+							>
+								<div className="flex flex-col items-center">
+									<div
+										className={`w-3 h-3 rounded-full flex-shrink-0 ${
+											index === 0 ? "bg-primary" : "bg-border"
+										}`}
+									/>
+									{index < achievements.length - 1 && (
+										<div className="w-0.5 h-12 bg-border/50 my-2" />
+									)}
+								</div>
 
-							<div className="flex-1 min-w-0 pt-0.5">
-								<h3 className="font-bold text-foreground text-base">
-									{achievement.title}
-								</h3>
-								<p className="text-sm text-muted-foreground">
-									{achievement.description}
-								</p>
-								<p className="text-xs text-muted-foreground font-medium mt-2">
-									{achievement.date}
-								</p>
+								<div className="flex-1 min-w-0 pt-0.5">
+									<h3 className="font-bold text-foreground text-base">
+										{achievement.title}
+									</h3>
+									<p className="text-sm text-muted-foreground">
+										{achievement.description}
+									</p>
+									<p className="text-xs text-muted-foreground font-medium mt-2">
+										{achievement.date}
+									</p>
+								</div>
 							</div>
-						</div>
-					))}
+						))}
+					</div>
 				</div>
 			)}
 
