@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 
 interface SignUpParams {
 	name: string;
@@ -55,7 +55,7 @@ export const handleSignUp = async ({
 	if (!usernameRegex.test(username)) {
 		addAlert(
 			"danger",
-			"Username can only contain letters, numbers, and underscores"
+			"Username can only contain letters, numbers, and underscores",
 		);
 		return false;
 	}
@@ -66,7 +66,7 @@ export const handleSignUp = async ({
 		const userCredential = await createUserWithEmailAndPassword(
 			auth,
 			email,
-			password
+			password,
 		);
 		const user = userCredential.user;
 

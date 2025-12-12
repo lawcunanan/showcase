@@ -9,7 +9,7 @@ import {
 	Timestamp,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 import { Achievement } from "@/lib/mock-data";
 
 interface SaveAchievementParams {

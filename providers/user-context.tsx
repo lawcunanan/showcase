@@ -21,7 +21,7 @@ import {
 	DocumentReference,
 } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
-import { useAlert } from "@/contexts/alert-context";
+import { useAlert } from "@/providers/alert-context";
 import { limit } from "firebase/firestore";
 import type { User } from "@/lib/mock-data";
 
@@ -33,7 +33,7 @@ interface UserContextAuthType {
 }
 
 const UserContextAuth = createContext<UserContextAuthType | undefined>(
-	undefined
+	undefined,
 );
 
 export function UserContextAuthProvider({ children }: { children: ReactNode }) {
@@ -47,52 +47,56 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 	const [userDetails, setUserDetails] = useState<User | null>(null);
 	const [userRef, setUserRef] = useState<DocumentReference | null>(null);
 	const [loading, setLoading] = useState(true);
+	const [redirectTo, setRedirectTo] = useState<string | null>(null);
+
+	const subscribeToUserDoc = (uid: string, logged: boolean) => {
+		const ref = doc(db, "users", uid);
+		setUserRef(ref);
+
+		return onSnapshot(
+			ref,
+			(docSnap) => {
+				if (!docSnap.exists()) {
+					addAlert("danger", "User document not found.");
+					setUserDetails(null);
+					return;
+				}
+
+				const data = docSnap.data() as User;
+
+				if (data.status === "Inactive") {
+					addAlert(
+						"danger",
+						"Firebase free trial has ended. Your portfolio is temporarily disabled until the Firebase subscription is reactivated.",
+					);
+					setUserDetails(null);
+					setRedirectTo("/firebase-reactivate");
+					return;
+				}
+
+				setUserDetails({
+					id: docSnap.id,
+					isCurrentUser: logged && docSnap.id === uid,
+					...(docSnap.data() as Omit<User, "id" | "isCurrentUser">),
+				});
+
+				if (data.username) {
+					setRedirectTo(`/portfolio/${data.username}`);
+				}
+
+				setLoading(false);
+			},
+			(error) => {
+				addAlert("danger", "Error fetching user details: " + error.message);
+				setUserDetails(null);
+				setLoading(false);
+				setRedirectTo("/");
+			},
+		);
+	};
 
 	useEffect(() => {
 		let unsubscribeUserDoc = () => {};
-
-		const subscribeToUserDoc = (uid: string, logged: boolean) => {
-			const ref = doc(db, "users", uid);
-			setUserRef(ref);
-
-			return onSnapshot(
-				ref,
-				(docSnap) => {
-					if (docSnap.exists()) {
-						const data = docSnap.data() as User;
-
-						if (data.status === "Inactive") {
-							addAlert(
-								"danger",
-								"Firebase free trial has ended. Your portfolio is temporarily disabled until the Firebase subscription is reactivated."
-							);
-							setUserDetails(null);
-							setLoading(false);
-							router.push("/firebase-reactivate");
-							return;
-						}
-
-						setUserDetails({
-							id: docSnap.id,
-							isCurrentUser: logged && docSnap.id === uid,
-							...(docSnap.data() as Omit<User, "id" | "isCurrentUser">),
-						});
-
-						if (data.username) router.push(`/portfolio/${data.username}`);
-					} else {
-						addAlert("danger", "User document not found.");
-						setUserDetails(null);
-					}
-					setLoading(false);
-				},
-				(error) => {
-					addAlert("danger", "Error fetching user details: " + error.message);
-					setUserDetails(null);
-					setLoading(false);
-					router.push("/");
-				}
-			);
-		};
 
 		const unsubscribeAuth = onAuthStateChanged(auth, async (currentUser) => {
 			unsubscribeUserDoc();
@@ -107,7 +111,7 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 					const q = query(
 						usersRef,
 						where("username", "==", username),
-						limit(1)
+						limit(1),
 					);
 					const snapshot = await getDocs(q);
 
@@ -116,20 +120,18 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 						unsubscribeUserDoc = subscribeToUserDoc(userDoc.id, false);
 					} else {
 						addAlert("danger", "User not found.");
-						setLoading(false);
-						router.push("/");
+						setRedirectTo("/");
 					}
 				} catch (error: any) {
 					addAlert(
 						"danger",
-						"Error fetching user by username: " + error.message
+						"Error fetching user by username: " + error.message,
 					);
-					setLoading(false);
-					router.push("/");
+					setRedirectTo("/");
 				}
 			} else {
+				if (pathname !== "/firebase-reactivate") setRedirectTo("/");
 				setLoading(false);
-				if (pathname !== "/firebase-reactivate") router.push("/");
 			}
 		});
 
@@ -137,7 +139,13 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 			unsubscribeAuth();
 			unsubscribeUserDoc();
 		};
-	}, [router, addAlert, username]);
+	}, [username]);
+
+	useEffect(() => {
+		if (redirectTo && pathname !== redirectTo) {
+			router.push(redirectTo);
+		}
+	}, [redirectTo, pathname, router]);
 
 	return (
 		<UserContextAuth.Provider value={{ user, userDetails, userRef, loading }}>
@@ -154,8 +162,7 @@ export function UserContextAuthProvider({ children }: { children: ReactNode }) {
 
 export function useUserAuth() {
 	const context = useContext(UserContextAuth);
-	if (!context) {
+	if (!context)
 		throw new Error("useUserAuth must be used within UserContextAuthProvider");
-	}
 	return context;
 }

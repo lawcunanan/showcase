@@ -11,8 +11,8 @@ import {
 	DialogFooter,
 } from "@/components/ui/dialog";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { AlertType } from "@/contexts/alert-context";
-import { handleLogout } from "@/controller/auth/logout";
+import { AlertType } from "@/providers/alert-context";
+import { handleLogout } from "@/controllers/auth/logout";
 
 interface SignOutDialogProps {
 	open: boolean;

@@ -5,7 +5,7 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "@/lib/firebase";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 import { User } from "@/lib/mock-data";
 
 interface UpdateInformationParams {
@@ -19,7 +19,7 @@ interface UpdateInformationParams {
 
 const uploadFileToStorage = async (
 	file: File,
-	path: string
+	path: string,
 ): Promise<string> => {
 	const storageRef = ref(storage, path);
 	await uploadBytes(storageRef, file);

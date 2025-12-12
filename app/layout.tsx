@@ -4,9 +4,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-import { AlertProvider } from "@/contexts/alert-context";
+import { AlertProvider } from "@/providers/alert-context";
 import { AlertContainer } from "@/components/portfolio/alert-container";
-import { UserContextAuthProvider } from "@/contexts/user-context";
+import { UserContextAuthProvider } from "@/providers/user-context";
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -36,7 +36,6 @@ export default function RootLayout({
 						<AlertContainer />
 					</UserContextAuthProvider>
 				</AlertProvider>
-
 				<Analytics />
 			</body>
 		</html>

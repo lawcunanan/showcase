@@ -2,12 +2,12 @@
 
 import { DocumentReference } from "firebase/firestore";
 import { ExternalLink, FolderOpen } from "lucide-react";
-import { getProjects } from "@/controller/get/getProjects";
+import { getProjects } from "@/controllers/get/getProjects";
 import { useEffect, useState } from "react";
 import type { Project, User } from "@/lib/mock-data";
-import { useAlert } from "@/contexts/alert-context";
+import { useAlert } from "@/providers/alert-context";
 import { ProjectsDialog } from "@/components/portfolio/dialogs/projects-dialog";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 
 interface ProjectsSectionProps {
 	userRef: DocumentReference;

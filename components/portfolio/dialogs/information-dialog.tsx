@@ -17,8 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { AlertType } from "@/contexts/alert-context";
-import { updateInformation } from "@/controller/update/updateInformation";
+import { AlertType } from "@/providers/alert-context";
+import { updateInformation } from "@/controllers/update/updateInformation";
 import { User } from "@/lib/mock-data";
 
 interface InformationDialogProps {

@@ -10,7 +10,7 @@ import {
 	deleteObject,
 } from "firebase/storage";
 import { storage } from "@/lib/firebase";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 import { User } from "@/lib/mock-data";
 
 interface UpdateGalleryParams {
@@ -24,7 +24,7 @@ interface UpdateGalleryParams {
 
 const uploadFileToStorage = async (
 	file: File,
-	path: string
+	path: string,
 ): Promise<string> => {
 	const storageRef = ref(storage, path);
 	await uploadBytes(storageRef, file);
@@ -57,7 +57,7 @@ export const updateGallery = async ({
 	try {
 		if (deletedFiles && deletedFiles.length > 0) {
 			await Promise.all(
-				deletedFiles.map((fileUrl) => deleteFileFromStorage(fileUrl))
+				deletedFiles.map((fileUrl) => deleteFileFromStorage(fileUrl)),
 			);
 		}
 

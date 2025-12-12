@@ -17,8 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { AlertType } from "@/contexts/alert-context";
-import { saveProject, deleteProject } from "@/controller/save/saveProject";
+import { AlertType } from "@/providers/alert-context";
+import { saveProject, deleteProject } from "@/controllers/save/saveProject";
 import type { Project, User } from "@/lib/mock-data";
 
 interface ProjectsDialogProps {
@@ -205,7 +205,7 @@ export function ProjectsDialog({
 													? setFormData({
 															...formData,
 															technologies: formData.technologies?.filter(
-																(t) => t !== tech
+																(t) => t !== tech,
 															),
 													  })
 													: setFormData({

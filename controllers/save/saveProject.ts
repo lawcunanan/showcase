@@ -14,7 +14,7 @@ import {
 	deleteObject,
 } from "firebase/storage";
 import { db, storage } from "@/lib/firebase";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 import { Project } from "@/lib/mock-data";
 
 interface SaveProjectParams {
@@ -36,7 +36,7 @@ interface DeleteProjectParams {
 
 const uploadFileToStorage = async (
 	file: File,
-	path: string
+	path: string,
 ): Promise<string> => {
 	const storageRef = ref(storage, path);
 	await uploadBytes(storageRef, file);

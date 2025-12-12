@@ -16,8 +16,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { AlertType } from "@/contexts/alert-context";
-import { updateGallery } from "@/controller/update/updateGallery";
+import { AlertType } from "@/providers/alert-context";
+import { updateGallery } from "@/controllers/update/updateGallery";
 import type { User } from "@/lib/mock-data";
 
 interface GalleryDialogProps {
@@ -37,7 +37,7 @@ export function GalleryDialog({
 }: GalleryDialogProps) {
 	const [imageFile, setImageFile] = useState<File | null>(null);
 	const [images, setImages] = useState<User["galleryImages"]>(
-		userdetails?.galleryImages || []
+		userdetails?.galleryImages || [],
 	);
 	const [deletedImages, setDeletedImages] = useState<User["galleryImages"]>([]);
 	const [loading, setLoading] = useState(false);

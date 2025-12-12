@@ -13,8 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAlert } from "@/contexts/alert-context";
-import { handleLogin } from "@/controller/auth/login";
+import { useAlert } from "@/providers/alert-context";
+import { handleLogin } from "@/controllers/auth/login";
 
 interface SignInDialogProps {
 	open: boolean;
@@ -38,7 +38,7 @@ export function SignInDialog({ open, onOpenChange }: SignInDialogProps) {
 	const handleSignIn = () => {
 		if (email && password) {
 			handleLogin(email, password, setLoading, addAlert, () =>
-				onOpenChange(false)
+				onOpenChange(false),
 			);
 		}
 	};

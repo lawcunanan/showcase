@@ -10,8 +10,8 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { TypingEffect } from "@/components/typing-effect";
 import { SignInDialog } from "@/components/portfolio/dialogs/sign-in-dialog";
 import { SignUpDialog } from "@/components/portfolio/dialogs/sign-up-dialog";
-import { useAlert } from "@/contexts/alert-context";
-import { getActiveUsers } from "@/controller/get/getActiveUsers";
+import { useAlert } from "@/providers/alert-context";
+import { getActiveUsers } from "@/controllers/get/getActiveUsers";
 import type { User } from "@/lib/mock-data";
 
 export default function Home() {

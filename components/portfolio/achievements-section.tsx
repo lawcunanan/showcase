@@ -3,10 +3,10 @@
 import type { Achievement } from "@/lib/mock-data";
 import { DocumentReference } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { getAchievements } from "@/controller/get/getAchievements";
-import { useAlert } from "@/contexts/alert-context";
+import { getAchievements } from "@/controllers/get/getAchievements";
+import { useAlert } from "@/providers/alert-context";
 import { AchievementsDialog } from "@/components/portfolio/dialogs/achievements-dialog";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 import { Award } from "lucide-react";
 
 interface AchievementsSectionProps {
@@ -34,7 +34,7 @@ export function AchievementsSection({
 			userRef,
 			setAchievements,
 			setLoading,
-			addAlert
+			addAlert,
 		);
 		return () => unsubscribe();
 	}, [userRef, addAlert]);

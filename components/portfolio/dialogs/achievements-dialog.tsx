@@ -16,11 +16,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { AlertType } from "@/contexts/alert-context";
+import { AlertType } from "@/providers/alert-context";
 import {
 	saveAchievement,
 	deleteAchievement,
-} from "@/controller/save/saveAchievement";
+} from "@/controllers/save/saveAchievement";
 import type { Achievement, User } from "@/lib/mock-data";
 
 interface AchievementsDialogProps {

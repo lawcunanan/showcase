@@ -13,8 +13,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { handleSignUp } from "@/controller/auth/signup";
-import { AlertType } from "@/contexts/alert-context";
+import { handleSignUp } from "@/controllers/auth/signup";
+import { AlertType } from "@/providers/alert-context";
 
 interface SignUpDialogProps {
 	open: boolean;

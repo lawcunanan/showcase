@@ -17,8 +17,8 @@ import { AchievementsDialog } from "@/components/portfolio/dialogs/achievements-
 import { GalleryDialog } from "@/components/portfolio/dialogs/gallery-dialog";
 import { ProjectsDialog } from "@/components/portfolio/dialogs/projects-dialog";
 import { SignOutDialog } from "@/components/portfolio/dialogs/sign-out-dialog";
-import { useUserAuth } from "@/contexts/user-context";
-import { useAlert } from "@/contexts/alert-context";
+import { useUserAuth } from "@/providers/user-context";
+import { useAlert } from "@/providers/alert-context";
 
 export default function PortfolioPage() {
 	const { userDetails, userRef } = useUserAuth();
