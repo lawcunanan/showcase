@@ -1,4 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { Image } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 export function GallerySection({ gallery }: { gallery: string[] }) {
 	return (
@@ -11,16 +16,7 @@ export function GallerySection({ gallery }: { gallery: string[] }) {
 				<div className="overflow-hidden relative">
 					<div className="animate-scroll">
 						{[...gallery, ...gallery].map((picture, index) => (
-							<div
-								key={index}
-								className="group overflow-hidden rounded-lg flex-shrink-0 w-60 bg-muted mx-3"
-							>
-								<img
-									src={picture || "/placeholder.svg"}
-									alt="Gallery Image"
-									className="w-full h-34 object-cover group-hover:scale-105 transition-transform duration-300"
-								/>
-							</div>
+							<GalleryImage key={index} src={picture} />
 						))}
 					</div>
 				</div>
@@ -33,5 +29,24 @@ export function GallerySection({ gallery }: { gallery: string[] }) {
 				</div>
 			)}
 		</section>
+	);
+}
+
+function GalleryImage({ src }: { src: string }) {
+	const [isLoading, setIsLoading] = useState(true);
+
+	return (
+		<div className="group relative overflow-hidden rounded-lg flex-shrink-0 w-60 bg-muted mx-3 h-34">
+			{isLoading && <Skeleton className="absolute inset-0 w-full h-full" />}
+			<img
+				src={src || "/placeholder.svg"}
+				alt="Gallery Image"
+				className={cn(
+					"w-full h-full object-cover group-hover:scale-105 transition-transform duration-300",
+					isLoading ? "opacity-0" : "opacity-100",
+				)}
+				onLoad={() => setIsLoading(false)}
+			/>
+		</div>
 	);
 }

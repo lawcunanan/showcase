@@ -31,7 +31,7 @@ export function ThemeToggle() {
 		<button
 			onClick={toggleTheme}
 			aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-			className="relative inline-flex h-10 w-20 items-center rounded-full bg-gray-300 dark:bg-gray-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background shadow-lg"
+			className="relative inline-flex h-10 w-20 items-center rounded-full bg-gray-300 dark:bg-gray-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background shadow-lg cursor-pointer"
 		>
 			{/* Sun Icon (Left side) */}
 			<Sun

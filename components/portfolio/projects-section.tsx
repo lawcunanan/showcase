@@ -8,6 +8,7 @@ import type { Project, User } from "@/lib/mock-data";
 import { useAlert } from "@/providers/alert-context";
 import { ProjectsDialog } from "@/components/portfolio/dialogs/projects-dialog";
 import { AlertType } from "@/providers/alert-context";
+import { FadeInImage } from "@/components/ui/fade-in-image";
 
 interface ProjectsSectionProps {
 	userRef: DocumentReference;
@@ -74,13 +75,12 @@ export function ProjectsSection({
 							key={project.id}
 							className="group bg-card border border-border rounded-lg overflow-hidden hover:border-primary transition-colors flex flex-col h-fit"
 						>
-							<div className="relative h-34 w-full overflow-hidden bg-muted">
-								<img
-									src={project.image || "/placeholder.svg"}
-									alt={project.title}
-									className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-								/>
-							</div>
+							<FadeInImage
+								src={project.image}
+								alt={project.title}
+								containerClassName="h-34 w-full"
+								className="group-hover:scale-105 transition-transform duration-300"
+							/>
 
 							<div className="flex flex-col justify-between flex-1 p-4">
 								<div className="space-y-2">

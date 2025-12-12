@@ -19,6 +19,7 @@ import { ProjectsDialog } from "@/components/portfolio/dialogs/projects-dialog";
 import { SignOutDialog } from "@/components/portfolio/dialogs/sign-out-dialog";
 import { useUserAuth } from "@/providers/user-context";
 import { useAlert } from "@/providers/alert-context";
+import { FadeInImage } from "@/components/ui/fade-in-image";
 
 export default function PortfolioPage() {
 	const { userDetails, userRef } = useUserAuth();
@@ -40,12 +41,11 @@ export default function PortfolioPage() {
 						className="hidden sm:flex flex-shrink-0 animate-fade-in-up bg-muted rounded-lg "
 						style={{ animationDelay: "0.1s" }}
 					>
-						<Image
+						<FadeInImage
 							src={userDetails?.avatar || "/placeholder.svg"}
 							alt={userDetails?.name}
-							width={150}
-							height={150}
-							className="rounded-lg object-cover  w-46 h-46 "
+							containerClassName="w-46 h-46 rounded-lg"
+							className="rounded-lg object-cover"
 						/>
 					</div>
 				)}
